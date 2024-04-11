@@ -7,24 +7,35 @@ Part 1 deliverables (in the document "Viterbi Algorithm"):
 3) Explain how the decoder works and show that the minimum branch metric = 0 when no errors are present. How does the decoder determine what sequence of bits was sent to the encoder?
 
 
+
+
 Add-Compare-Select
 
 path cost(i)  = path metric(i) + branch metric(i)
 
 valid_o = 0 | selection = 0 | path cost = 0
+
 valid_o = 0 | selection = 1 | path cost = 0
+
 valid_o = 1 | selection = 0 | path cost = path_cost_0
+
 valid_o = 1 | selection = 1 | path cost = path_cost_1
 
 valid_o = 0 if neither path valid
 
 
+
+
 path_o_valid = 0 | path_1_valid = 0 | selection = 0
+
 path_o_valid = 0 | path_1_valid = 1 | selection = 1
+
 path_o_valid = 0 | path_1_valid = 0 | selection = 0
+
 path_o_valid = 1 | path_1_valid = 1 | selection = *
 
 *: 1 if path_cost_0 larger than path_cost_1; else 0
+
 
 
 Branch Metric Computation Blocks
@@ -40,16 +51,30 @@ path_0_bmc[1] = tmp00 & tmp01
   same for path_1_bmc with tmp10 and tmp11          
 
 
+
+
+
 Encoder
               d_in = 0                     d_in = 1
+              
 cstate = 0 | nstate = 0 | d_out_reg = 00 | nstate = 4 | d_out_reg = 11
+
 cstate = 1 | nstate = 4 | d_out_reg = 00 | nstate = 0 | d_out_reg = 11
+
 cstate = 2 | nstate = 5 | d_out_reg = 10 | nstate = 1 | d_out_reg = 01
+
 cstate = 3 | nstate = 1 | d_out_reg = 10 | nstate = 5 | d_out_reg = 01
+
 cstate = 4 | nstate = 2 | d_out_reg = 10 | nstate = 6 | d_out_reg = 01
+
 cstate = 5 | nstate = 6 | d_out_reg = 10 | nstate = 2 | d_out_reg = 01
+
 cstate = 6 | nstate = 7 | d_out_reg = 00 | nstate = 3 | d_out_reg = 11
+
 cstate = 7 | nstate = 3 | d_out_reg = 00 | nstate = 7 | d_out_reg = 11
+
+
+
 
 
 Trace Back Unit
@@ -60,14 +85,23 @@ d_o_reg  = if (selection) d_in_1[pstate]    else d_o_reg = 0
 State Transition Table: nstate[i] (Next State) = f(pstate[i], selection, d_in_0[i], d_in_1[i]
 
 pstate      |   selection=0   |   selection=0   |   selection=1   |   selection=1
+
 pstate      |d_in_0[pstate]=0 | d_in_0[pstate]=1| d_in_1[pstate]=0| d_in_1[pstate]=1
-pstate = 0  |       0         |       1         |       0         |       1               
-pstate = 1  |       3         |       2         |       3         |       2               
-pstate = 2  |       4         |       5         |       4         |       5               
-pstate = 3  |       7         |       6         |       7         |       6               
-pstate = 4  |       1         |       0         |       1         |       0               
-pstate = 5  |       2         |       3         |       2         |       3               
-pstate = 6  |       5         |       4         |       5         |       4               
+
+pstate = 0  |       0         |       1         |       0         |       1            
+
+pstate = 1  |       3         |       2         |       3         |       2        
+
+pstate = 2  |       4         |       5         |       4         |       5        
+
+pstate = 3  |       7         |       6         |       7         |       6         
+
+pstate = 4  |       1         |       0         |       1         |       0        
+
+pstate = 5  |       2         |       3         |       2         |       3        
+
+pstate = 6  |       5         |       4         |       5         |       4           
+
 pstate = 7  |       6         |       7         |       6         |       7               
 
 
