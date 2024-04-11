@@ -59,8 +59,8 @@ d_o_reg  = if (selection) d_in_1[pstate]    else d_o_reg = 0
 
 State Transition Table: nstate[i] (Next State) = f(pstate[i], selection, d_in_0[i], d_in_1[i]
 
-            |   selection=0   |   selection=0   |   selection=1   |   selection=1
-            |d_in_0[pstate]=0 | d_in_0[pstate]=1| d_in_1[pstate]=0| d_in_1[pstate]=1
+pstate      |   selection=0   |   selection=0   |   selection=1   |   selection=1
+pstate      |d_in_0[pstate]=0 | d_in_0[pstate]=1| d_in_1[pstate]=0| d_in_1[pstate]=1
 pstate = 0  |       0         |       1         |       0         |       1               
 pstate = 1  |       3         |       2         |       3         |       2               
 pstate = 2  |       4         |       5         |       4         |       5               
